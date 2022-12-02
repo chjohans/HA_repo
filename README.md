@@ -71,7 +71,7 @@ NB: All the files that I refer to below can be found under the directory `mii_ai
 
 5. Next it's time to add the actual [card](https://www.home-assistant.io/dashboards/cards/) to your [Home Assistant](https://www.home-assistant.io/) configuration, the easiest way to do this is by using the GUI. Just select the [dashboard](https://www.home-assistant.io/dashboards/) you want to add this [card](https://www.home-assistant.io/dashboards/cards/) to, and then select `Edit Dashboard` from the `kebab menu` (three vertical dots) in the top-right corner of your browser window. Next click on `ADD CARD`, then select the [card type](https://www.home-assistant.io/dashboards/cards/) `Manual`, then paste in the edited [card](https://www.home-assistant.io/dashboards/cards/) YAML code from the step above. Make sure to delete/replace the first line that says `type: ''` when you add a manual [card](https://www.home-assistant.io/dashboards/cards/). And again, watch your indentation, this is still [YAML](https://yaml.org/)!
 
-If you have followed the instructions above exactly as they were written you should now see a custom card for your air purifier, and it should be ready to be used to operate your air purifier from within [Home Assistant](https://www.home-assistant.io/). If you see an error message instead then re-check each step in this guide.
+If you have followed the instructions above exactly as they were written you should now see a custom card for your air purifier, and it should be ready to be used to operate your air purifier from within [Home Assistant](https://www.home-assistant.io/). If you see an error message instead then re-check each step in this guide. It should look something like in the image below it it's `off`:
 
 ![Image showing the Air Purifier Card in it's off-state](https://raw.githubusercontent.com/chjohans/HA_repo/main/mii_air_purifier_3h_card/air_purifier_off.png)
 
@@ -82,15 +82,19 @@ Note: If you don't want or need the ability to adjust your favorite fan levels t
 How to use this [card](https://www.home-assistant.io/dashboards/cards/) should be pretty self-explanatory, and all the buttons on the card have a hover text. Here is what the [card](https://www.home-assistant.io/dashboards/cards/) looks like in all the different air purifier states:
 
 _Fan mode:_
+
 ![Image showing the Air Purifier Card in it's fan-mode](https://raw.githubusercontent.com/chjohans/HA_repo/main/mii_air_purifier_3h_card/air_purifier_fan.png)
 
 _Silent mode:_
+
 ![Image showing the Air Purifier Card in it's silent-mode](https://raw.githubusercontent.com/chjohans/HA_repo/main/mii_air_purifier_3h_card/air_purifier_silent.png)
 
 _Auto mode:_
+
 ![Image showing the Air Purifier Card in it's auto-mode](https://raw.githubusercontent.com/chjohans/HA_repo/main/mii_air_purifier_3h_card/air_purifier_auto.png)
 
 _Favorite mode:_
+
 ![Image showing the Air Purifier Card in it's favorite-mode](https://raw.githubusercontent.com/chjohans/HA_repo/main/mii_air_purifier_3h_card/air_purifier_favorite.png)
 
 ### Automations
@@ -125,7 +129,7 @@ This automation will start and stop your air purifier based on a schedule. It us
 
 To enable this automation just do the following:
 
-1. First you have to define a [schedule](https://www.home-assistant.io/integrations/schedule/) that defines when your air purifier should be on and off. You do this by going to `Settings` -> `Devices & Services` -> `Helpers` in your HA installation, and then clicking on `CREATE HELPER`. Then choose `Schedule` and give it a suitable name. I named mine "Air Purifier Studio Schedule", so the resulting schedule [entity](https://developers.home-assistant.io/docs/core/entity/) id would be `schedule.air_purifier_studio_schedule` (you will need this name later when you edit the automation YAML code). Just drag with your mouse to select the days and time of the days when your air purifier should be `on`. My schedule looks like something in the image below:
+1. First you have to define a [schedule](https://www.home-assistant.io/integrations/schedule/) that defines when your air purifier should be on and off. You do this by going to `Settings` -> `Devices & Services` -> `Helpers` in your HA installation, and then clicking on `CREATE HELPER`. Then choose `Schedule` and give it a suitable name. I named mine "Air Purifier Studio Schedule", so the resulting schedule [entity](https://developers.home-assistant.io/docs/core/entity/) id would be `schedule.air_purifier_studio_schedule` (you will need this name later when you edit the automation YAML code). Just drag with your mouse to select the days and time of the days when your air purifier should be `on`. My schedule looks something like in the image below:
 
 ![Image showing the Air Purifier Schedule](https://raw.githubusercontent.com/chjohans/HA_repo/main/mii_air_purifier_3h_card/air_purifier_schedule.png)
 
