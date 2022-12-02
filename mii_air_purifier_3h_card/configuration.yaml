@@ -25,13 +25,13 @@ template:
       state: "{{ is_state('fan.air_purifier_studio', 'off') }}"
   - binary_sensor:
     - name: air_purifier_studio_pm2_5_green
-      state: "{{ states('sensor.air_purifier_studio_pm2_5') | int <= 30 }}"
+      state: "{{ states('sensor.air_purifier_studio_pm2_5') | int <= 10 }}"
   - binary_sensor:
     - name: air_purifier_studio_pm2_5_yellow
-      state: "{{ states('sensor.air_purifier_studio_pm2_5') | int > 30 and states('sensor.air_purifier_studio_pm2_5') | int <= 50 }}"
+      state: "{{ states('sensor.air_purifier_studio_pm2_5') | int > 10 and states('sensor.air_purifier_studio_pm2_5') | int <= 40 }}"
   - binary_sensor:
     - name: air_purifier_studio_pm2_5_orange
-      state: "{{ states('sensor.air_purifier_studio_pm2_5') | int > 50 and states('sensor.air_purifier_studio_pm2_5') | int <= 80 }}"
+      state: "{{ states('sensor.air_purifier_studio_pm2_5') | int > 40 and states('sensor.air_purifier_studio_pm2_5') | int <= 80 }}"
   - binary_sensor:
     - name: air_purifier_studio_pm2_5_red
       state: "{{ states('sensor.air_purifier_studio_pm2_5') | int > 80 }}"

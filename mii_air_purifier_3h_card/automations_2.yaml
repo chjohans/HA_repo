@@ -1,0 +1,49 @@
+- id: '1669748282465'
+  alias: Action - Start and stop Air Purifier in Studio based on it's schedule
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - schedule.air_purifier_studio_schedule
+    to: 'on'
+    id: 'on'
+  - platform: state
+    entity_id:
+    - schedule.air_purifier_studio_schedule
+    id: 'off'
+    to: 'off'
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 'on'
+      sequence:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.air_purifier_studio_buzzer
+      - service: select.select_option
+        data:
+          option: dim
+        target:
+          entity_id: select.air_purifier_studio_led_brightness
+      - service: number.set_value
+        data:
+          value: '1'
+        target:
+          entity_id: number.air_purifier_studio_favorite_level
+      - service: fan.turn_on
+        data:
+          preset_mode: Favorite
+        target:
+          entity_id: fan.air_purifier_studio
+    - conditions:
+      - condition: trigger
+        id: 'off'
+      sequence:
+      - service: fan.turn_off
+        data: {}
+        target:
+          entity_id: fan.air_purifier_studio
+  mode: single

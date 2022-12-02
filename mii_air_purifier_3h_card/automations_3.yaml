@@ -1,0 +1,37 @@
+- id: '1669795085615'
+  alias: Action - Start Air Purifier in Studio if PM2.5 is high
+  description: ''
+  trigger:
+  - type: pm25
+    platform: device
+    device_id: 1ff5f89d318fdfacd7703f6c6e769270
+    entity_id: sensor.air_purifier_studio_pm2_5
+    domain: sensor
+    above: 25
+  condition:
+  - condition: device
+    device_id: 1ff5f89d318fdfacd7703f6c6e769270
+    domain: fan
+    entity_id: fan.air_purifier_studio
+    type: is_off
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.air_purifier_studio_buzzer
+  - service: select.select_option
+    data:
+      option: dim
+    target:
+      entity_id: select.air_purifier_studio_led_brightness
+  - service: number.set_value
+    data:
+      value: '1'
+    target:
+      entity_id: number.air_purifier_studio_favorite_level
+  - service: fan.turn_on
+    data:
+      preset_mode: Favorite
+    target:
+      entity_id: fan.air_purifier_studio
+  mode: single
