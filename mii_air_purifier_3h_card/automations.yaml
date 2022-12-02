@@ -1,0 +1,33 @@
+- id: '1669686055076'
+  alias: Action - Set favorite level for Air Purifier in Studio based based on PM2.5
+  description: ''
+  trigger:
+  - platform: time_pattern
+    minutes: /5
+  condition:
+  - condition: state
+    entity_id: fan.air_purifier_studio
+    state: 'on'
+  - condition: state
+    entity_id: fan.air_purifier_studio
+    attribute: preset_mode
+    state: Favorite
+  action:
+  - service: fan.set_preset_mode
+    data:
+      preset_mode: Favorite
+    target:
+      entity_id: fan.air_purifier_studio
+  - service: number.set_value
+    data:
+      value: "{% if states('sensor.air_purifier_studio_pm2_5') | int > 140 %}\n  14\n{%
+        elif states('sensor.air_purifier_studio_pm2_5') | int > 120 %}\n  12\n{% elif
+        states('sensor.air_purifier_studio_pm2_5') | int > 100 %}\n  10\n{% elif states('sensor.air_purifier_studio_pm2_5')
+        | int > 80 %}\n  8\n{% elif states('sensor.air_purifier_studio_pm2_5') | int
+        > 60 %}\n  6\n{% elif states('sensor.air_purifier_studio_pm2_5') | int > 40
+        %} \n  4\n{% elif states('sensor.air_purifier_studio_pm2_5') | int > 25 %}\n
+        \ 3\n{% elif states('sensor.air_purifier_studio_pm2_5') | int > 10 %}\n  2\n{%
+        else %}\n  1\n{% endif %}"
+    target:
+      entity_id: number.air_purifier_studio_favorite_level
+  mode: single

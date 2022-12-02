@@ -1,0 +1,425 @@
+type: custom:stack-in-card
+cards:
+  - type: vertical-stack
+    cards:
+      - type: picture-elements
+        image: local/AP-Card-Background.png
+        title: Air Purifier in Studio
+        elements:
+          - type: state-icon
+            entity: binary_sensor.air_purifier_studio_mode_off
+            title: 'Off'
+            icon: mdi:power-standby
+            tap_action:
+              action: call-service
+              service: fan.toggle
+              service_data:
+                entity_id: fan.air_purifier_studio
+            style:
+              top: 0%
+              left: 10%
+              min-width: 40px
+              min-height: 40px
+              transform: translate(-50%, -50%) scale(1.5)
+              '--paper-item-icon-color': rgb(192, 192, 192)
+              '--paper-item-icon-active-color': rgb(100, 115, 130)
+          - type: state-icon
+            entity: binary_sensor.air_purifier_studio_mode_fan
+            title: Fan
+            icon: mdi:fan
+            tap_action:
+              action: call-service
+              service: fan.set_preset_mode
+              service_data:
+                entity_id: fan.air_purifier_studio
+                preset_mode: Fan
+            style:
+              top: 0%
+              left: 30%
+              transform: translate(-50%, -50%) scale(1.5)
+              '--paper-item-icon-color': rgb(192, 192, 192)
+              '--paper-item-icon-active-color': rgb(100, 115, 130)
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.air_purifier_studio_mode_fan
+                state: 'on'
+            elements:
+              - type: state-icon
+                entity: binary_sensor.air_purifier_studio_mode_fan_1
+                title: Low speed
+                icon: mdi:fan-speed-1
+                tap_action:
+                  action: call-service
+                  service: number.set_value
+                  service_data:
+                    entity_id: number.air_purifier_studio_fan_level
+                    value: 1
+                style:
+                  top: 70%
+                  left: 10%
+                  transform: translate(-50%, -50%) scale(1.2, 1.2)
+                  '--paper-item-icon-color': rgb(192, 192, 192)
+                  '--paper-item-icon-active-color': rgb(100, 115, 130)
+              - type: state-icon
+                entity: binary_sensor.air_purifier_studio_mode_fan_2
+                title: Medium speed
+                icon: mdi:fan-speed-2
+                tap_action:
+                  action: call-service
+                  service: number.set_value
+                  service_data:
+                    entity_id: number.air_purifier_studio_fan_level
+                    value: 2
+                style:
+                  top: 70%
+                  left: 20%
+                  transform: translate(-50%, -50%) scale(1.2, 1.2)
+                  '--paper-item-icon-color': rgb(192, 192, 192)
+                  '--paper-item-icon-active-color': rgb(100, 115, 130)
+              - type: state-icon
+                entity: binary_sensor.air_purifier_studio_mode_fan_3
+                title: High speed
+                icon: mdi:fan-speed-3
+                tap_action:
+                  action: call-service
+                  service: number.set_value
+                  service_data:
+                    entity_id: number.air_purifier_studio_fan_level
+                    value: 3
+                style:
+                  top: 70%
+                  left: 30%
+                  transform: translate(-50%, -50%) scale(1.2, 1.2)
+                  '--paper-item-icon-color': rgb(192, 192, 192)
+                  '--paper-item-icon-active-color': rgb(100, 115, 130)
+          - type: state-icon
+            entity: binary_sensor.air_purifier_studio_mode_silent
+            title: Silent
+            icon: mdi:power-sleep
+            tap_action:
+              action: call-service
+              service: fan.set_preset_mode
+              service_data:
+                entity_id: fan.air_purifier_studio
+                preset_mode: Silent
+            style:
+              top: 0%
+              left: 50%
+              transform: translate(-50%, -50%) scale(1.5)
+              '--paper-item-icon-color': rgb(192, 192, 192)
+              '--paper-item-icon-active-color': rgb(100, 115, 130)
+              '--iron-icon-height': 120px
+              '--iron-icon-width': 120px
+          - type: state-icon
+            entity: binary_sensor.air_purifier_studio_mode_auto
+            title: Auto
+            icon: mdi:alpha-a-circle
+            tap_action:
+              action: call-service
+              service: fan.set_preset_mode
+              service_data:
+                entity_id: fan.air_purifier_studio
+                preset_mode: Auto
+            style:
+              top: 0%
+              left: 70%
+              transform: translate(-50%, -50%) scale(1.5)
+              '--paper-item-icon-color': rgb(192, 192, 192)
+              '--paper-item-icon-active-color': rgb(100, 115, 130)
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.air_purifier_studio_pm2_5_green
+                state: 'on'
+            elements:
+              - type: state-icon
+                entity: binary_sensor.air_purifier_studio_mode_favorite
+                title: Favorite
+                icon: mdi:heart
+                tap_action:
+                  action: call-service
+                  service: fan.set_preset_mode
+                  service_data:
+                    entity_id: fan.air_purifier_studio
+                    preset_mode: Favorite
+                style:
+                  top: 0%
+                  left: 90%
+                  transform: translate(-50%, -50%) scale(1.5)
+                  '--paper-item-icon-color': rgb(192, 192, 192)
+                  '--paper-item-icon-active-color': rgb(0, 165, 50)
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.air_purifier_studio_pm2_5_yellow
+                state: 'on'
+            elements:
+              - type: state-icon
+                entity: binary_sensor.air_purifier_studio_mode_favorite
+                title: Favorite
+                icon: mdi:heart
+                tap_action:
+                  action: call-service
+                  service: fan.set_preset_mode
+                  service_data:
+                    entity_id: fan.air_purifier_studio
+                    preset_mode: Favorite
+                style:
+                  top: 0%
+                  left: 90%
+                  transform: translate(-50%, -50%) scale(1.5)
+                  '--paper-item-icon-color': rgb(192, 192, 192)
+                  '--paper-item-icon-active-color': rgb(255, 220, 0)
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.air_purifier_studio_pm2_5_orange
+                state: 'on'
+            elements:
+              - type: state-icon
+                entity: binary_sensor.air_purifier_studio_mode_favorite
+                title: Favorite
+                icon: mdi:heart
+                tap_action:
+                  action: call-service
+                  service: fan.set_preset_mode
+                  service_data:
+                    entity_id: fan.air_purifier_studio
+                    preset_mode: Favorite
+                style:
+                  top: 0%
+                  left: 90%
+                  transform: translate(-50%, -50%) scale(1.5)
+                  '--paper-item-icon-color': rgb(192, 192, 192)
+                  '--paper-item-icon-active-color': rgb(255, 128, 10)
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.air_purifier_studio_pm2_5_red
+                state: 'on'
+            elements:
+              - type: state-icon
+                entity: binary_sensor.air_purifier_studio_mode_favorite
+                title: Favorite
+                icon: mdi:heart
+                tap_action:
+                  action: call-service
+                  service: fan.set_preset_mode
+                  service_data:
+                    entity_id: fan.air_purifier_studio
+                    preset_mode: Favorite
+                style:
+                  top: 0%
+                  left: 90%
+                  transform: translate(-50%, -50%) scale(1.5)
+                  '--paper-item-icon-color': rgb(192, 192, 192)
+                  '--paper-item-icon-active-color': rgb(200, 30, 30)
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.air_purifier_studio_mode_favorite
+                state: 'on'
+              - entity: binary_sensor.air_purifier_studio_pm2_5_green
+                state: 'on'
+            elements:
+              - type: state-label
+                prefix: 'Level '
+                entity: number.air_purifier_studio_favorite_level
+                style:
+                  top: 75%
+                  left: 20%
+                  font-size: 150%
+                  font-weight: bold
+                  color: rgb(0, 165, 50)
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.air_purifier_studio_mode_favorite
+                state: 'on'
+              - entity: binary_sensor.air_purifier_studio_pm2_5_yellow
+                state: 'on'
+            elements:
+              - type: state-label
+                prefix: 'Level '
+                entity: number.air_purifier_studio_favorite_level
+                style:
+                  top: 75%
+                  left: 20%
+                  font-size: 150%
+                  font-weight: bold
+                  color: rgb(255, 220, 0)
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.air_purifier_studio_mode_favorite
+                state: 'on'
+              - entity: binary_sensor.air_purifier_studio_pm2_5_orange
+                state: 'on'
+            elements:
+              - type: state-label
+                prefix: 'Level '
+                entity: number.air_purifier_studio_favorite_level
+                style:
+                  top: 75%
+                  left: 20%
+                  font-size: 150%
+                  font-weight: bold
+                  color: rgb(255, 128, 10)
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.air_purifier_studio_mode_favorite
+                state: 'on'
+              - entity: binary_sensor.air_purifier_studio_pm2_5_red
+                state: 'on'
+            elements:
+              - type: state-label
+                prefix: 'Level '
+                entity: number.air_purifier_studio_favorite_level
+                style:
+                  top: 75%
+                  left: 20%
+                  font-size: 150%
+                  font-weight: bold
+                  color: rgb(200, 30, 30)
+          - type: conditional
+            conditions:
+              - entity: select.air_purifier_studio_led_brightness
+                state: bright
+            elements:
+              - type: state-icon
+                entity: select.air_purifier_studio_led_brightness
+                title: Dim display
+                icon: mdi:brightness-5
+                tap_action:
+                  action: call-service
+                  service: select.select_option
+                  data:
+                    option: dim
+                  target:
+                    entity_id: select.air_purifier_studio_led_brightness
+                style:
+                  top: 70%
+                  left: 40%
+                  transform: translate(-50%, -50%) scale(1.2, 1.2)
+                  '--paper-item-icon-color': rgb(192, 192, 192)
+                  '--paper-item-icon-active-color': rgb(192, 192, 192)
+          - type: conditional
+            conditions:
+              - entity: select.air_purifier_studio_led_brightness
+                state: dim
+            elements:
+              - type: state-icon
+                entity: select.air_purifier_studio_led_brightness
+                title: Display off
+                icon: mdi:brightness-6
+                tap_action:
+                  action: call-service
+                  service: select.select_option
+                  data:
+                    option: 'off'
+                  target:
+                    entity_id: select.air_purifier_studio_led_brightness
+                style:
+                  top: 70%
+                  left: 40%
+                  transform: translate(-50%, -50%) scale(1.2, 1.2)
+                  '--paper-item-icon-color': rgb(192, 192, 192)
+                  '--paper-item-icon-active-color': rgb(192, 192, 192)
+          - type: conditional
+            conditions:
+              - entity: select.air_purifier_studio_led_brightness
+                state: 'off'
+            elements:
+              - type: state-icon
+                entity: select.air_purifier_studio_led_brightness
+                title: Bright display
+                icon: mdi:brightness-7
+                tap_action:
+                  action: call-service
+                  service: select.select_option
+                  data:
+                    option: bright
+                  target:
+                    entity_id: select.air_purifier_studio_led_brightness
+                style:
+                  top: 70%
+                  left: 40%
+                  transform: translate(-50%, -50%) scale(1.2, 1.2)
+                  '--paper-item-icon-color': rgb(192, 192, 192)
+                  '--paper-item-icon-active-color': rgb(192, 192, 192)
+          - type: conditional
+            conditions:
+              - entity: switch.air_purifier_studio_buzzer
+                state: 'on'
+            elements:
+              - type: state-icon
+                entity: switch.air_purifier_studio_buzzer
+                title: Buzzer off
+                icon: mdi:volume-high
+                tap_action:
+                  action: toggle
+                style:
+                  top: 70%
+                  left: 50%
+                  transform: translate(-50%, -50%) scale(1.2, 1.2)
+                  '--paper-item-icon-color': rgb(192, 192, 192)
+                  '--paper-item-icon-active-color': rgb(192, 192, 192)
+          - type: conditional
+            conditions:
+              - entity: switch.air_purifier_studio_buzzer
+                state: 'off'
+            elements:
+              - type: state-icon
+                entity: switch.air_purifier_studio_buzzer
+                title: Buzzer on
+                icon: mdi:volume-off
+                tap_action:
+                  action: toggle
+                style:
+                  top: 70%
+                  left: 50%
+                  transform: translate(-50%, -50%) scale(1.2, 1.2)
+                  '--paper-item-icon-color': rgb(192, 192, 192)
+                  '--paper-item-icon-active-color': rgb(192, 192, 192)
+          - type: conditional
+            conditions:
+              - entity: switch.air_purifier_studio_child_lock
+                state: 'on'
+            elements:
+              - type: state-icon
+                entity: switch.air_purifier_studio_child_lock
+                title: Unlock display
+                icon: mdi:lock
+                tap_action:
+                  action: toggle
+                style:
+                  top: 70%
+                  left: 60%
+                  transform: translate(-50%, -50%) scale(1.2, 1.2)
+                  '--paper-item-icon-color': rgb(192, 192, 192)
+                  '--paper-item-icon-active-color': rgb(192, 192, 192)
+          - type: conditional
+            conditions:
+              - entity: switch.air_purifier_studio_child_lock
+                state: 'off'
+            elements:
+              - type: state-icon
+                entity: switch.air_purifier_studio_child_lock
+                title: Lock display
+                icon: mdi:lock-open
+                tap_action:
+                  action: toggle
+                style:
+                  top: 70%
+                  left: 60%
+                  transform: translate(-50%, -50%) scale(1.2, 1.2)
+                  '--paper-item-icon-color': rgb(192, 192, 192)
+                  '--paper-item-icon-active-color': rgb(192, 192, 192)
+          - type: state-label
+            prefix: 'Filter Left: '
+            entity: sensor.air_purifier_studio_filter_life_remaining
+            style:
+              top: 80%
+              left: 85%
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.air_purifier_studio_pm2_5
+        points_per_hour: 3
+        animate: true
+        show:
+          icon: false
+          name: false
+          state: true

@@ -1,0 +1,37 @@
+template:
+  - binary_sensor:
+    - name: air_purifier_studio_mode_silent
+      state: "{{ state_attr('fan.air_purifier_studio', 'preset_mode') ==  'Silent' and is_state('fan.air_purifier_studio', 'on') }}"
+  - binary_sensor:
+    - name: air_purifier_studio_mode_favorite
+      state: "{{ state_attr('fan.air_purifier_studio', 'preset_mode') ==  'Favorite' and is_state('fan.air_purifier_studio', 'on') }}"
+  - binary_sensor:
+    - name: air_purifier_studio_mode_fan
+      state: "{{ state_attr('fan.air_purifier_studio', 'preset_mode') ==  'Fan' and is_state('fan.air_purifier_studio', 'on') }}"
+  - binary_sensor:
+    - name: air_purifier_studio_mode_fan_1'
+      state: "{{ state_attr('fan.air_purifier_studio', 'preset_mode') ==  'Fan' and (is_state('number.air_purifier_studio_fan_level', '1') or is_state('number.air_purifier_studio_fan_level', '1.0')) and is_state('fan.air_purifier_studio', 'on') }}"
+  - binary_sensor:
+    - name: air_purifier_studio_mode_fan_2
+      state: "{{ state_attr('fan.air_purifier_studio', 'preset_mode') ==  'Fan' and (is_state('number.air_purifier_studio_fan_level', '2') or is_state('number.air_purifier_studio_fan_level', '2.0')) and is_state('fan.air_purifier_studio', 'on') }}"
+  - binary_sensor:
+    - name: air_purifier_studio_mode_fan_3
+      state: "{{ state_attr('fan.air_purifier_studio', 'preset_mode') ==  'Fan' and (is_state('number.air_purifier_studio_fan_level', '3') or is_state('number.air_purifier_studio_fan_level', '3.0')) and is_state('fan.air_purifier_studio', 'on') }}"
+  - binary_sensor:
+    - name: air_purifier_studio_mode_auto
+      state: "{{ state_attr('fan.air_purifier_studio', 'preset_mode') ==  'Auto' and is_state('fan.air_purifier_studio', 'on') }}"
+  - binary_sensor:
+    - name: air_purifier_studio_mode_off
+      state: "{{ is_state('fan.air_purifier_studio', 'off') }}"
+  - binary_sensor:
+    - name: air_purifier_studio_pm2_5_green
+      state: "{{ states('sensor.air_purifier_studio_pm2_5') | int <= 30 }}"
+  - binary_sensor:
+    - name: air_purifier_studio_pm2_5_yellow
+      state: "{{ states('sensor.air_purifier_studio_pm2_5') | int > 30 and states('sensor.air_purifier_studio_pm2_5') | int <= 50 }}"
+  - binary_sensor:
+    - name: air_purifier_studio_pm2_5_orange
+      state: "{{ states('sensor.air_purifier_studio_pm2_5') | int > 50 and states('sensor.air_purifier_studio_pm2_5') | int <= 80 }}"
+  - binary_sensor:
+    - name: air_purifier_studio_pm2_5_red
+      state: "{{ states('sensor.air_purifier_studio_pm2_5') | int > 80 }}"
