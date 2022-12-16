@@ -4,7 +4,7 @@ cards:
     cards:
       - type: picture-elements
         image: local/AP-Card-Background.png
-        title: Air Purifier in Studio
+        title: Air Quality
         elements:
           - type: state-icon
             entity: binary_sensor.air_purifier_studio_mode_off

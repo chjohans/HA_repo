@@ -4,7 +4,7 @@ cards:
     cards:
       - type: picture-elements
         image: local/AP-Card-Background.png
-        title: Air Purifier in Studio
+        title: Air Quality
         elements:
           - type: state-icon
             entity: binary_sensor.air_purifier_studio_mode_off
@@ -222,16 +222,16 @@ cards:
                 icon_plus: mdi:fan-plus
                 icon_minus: mdi:fan-minus
                 style:
-                  top: 70%
+                  top: 75%
                   left: 20%
                   width: 25%
                 card_mod:
                   style: |
-                    .cur-num{font-size:25px !important}
+                    .cur-num{font-size:20px !important}
                     .cur-num.upd{color:rgb(200, 30, 30)}
                     .cur-num{color:rgb(100, 115, 130)}
                     .cur-box ha-icon{color:rgb(192, 192, 192)}
-                    .cur-box ha-icon{transform:scale(1)}
+                    .cur-box ha-icon{transform:scale(0.8)}
           - type: conditional
             conditions:
               - entity: select.air_purifier_studio_led_brightness
